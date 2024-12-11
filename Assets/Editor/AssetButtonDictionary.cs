@@ -16,9 +16,12 @@ namespace Odonata {
 		public static AddAssetKeyValuePair Find(string dirpath) {
 			if (m_Instance == null) {
 				string[] dictGUIDs = AssetDatabase.FindAssets(string.Format($"t:{nameof(AssetButtonDictionary)}"));
-				if (dictGUIDs.Length == 0) return null;
-
-				m_Instance = AssetDatabase.LoadAssetAtPath<AssetButtonDictionary>(AssetDatabase.GUIDToAssetPath(dictGUIDs[0]));
+				if (dictGUIDs.Length == 0) {
+					m_Instance = new AssetButtonDictionary();
+					AssetDatabase.CreateAsset(m_Instance, "Assets/AssetButtons.asset");
+				} else {
+					m_Instance = AssetDatabase.LoadAssetAtPath<AssetButtonDictionary>(AssetDatabase.GUIDToAssetPath(dictGUIDs[0]));
+				}
 			}
 			return m_Instance._Find(dirpath);
 		}
@@ -29,11 +32,6 @@ namespace Odonata {
 				if (item.dirname == name) return item;
 			}
 			return null;
-		}
-
-		[MenuItem("Window/Asset Buttons/Create Dictionary")]
-		public static void CreateAsset() {
-			AssetDatabase.CreateAsset(new AssetButtonDictionary(), "Assets/AssetButtons.asset");
 		}
 	}
 }
