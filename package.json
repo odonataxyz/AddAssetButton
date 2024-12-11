@@ -1,0 +1,10 @@
+{
+	"name": "com.odonata.add-asset-button",
+	"displayName": "Add Asset Button",
+	"version": "0.1.0",
+	"author": {
+		"name" : "odonata",
+		"email" : "odonata.xyz@gmail.com",
+		"url" : "https://odonata.xyz/"
+	}
+}
